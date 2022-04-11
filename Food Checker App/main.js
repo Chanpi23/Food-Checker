@@ -44,19 +44,24 @@ function getFetch() {
  for ( let i =1; i < tableRef.rows.length;) {
      tableRef.deleteRow(i);
  }
-  if (!(this.ingredients==null)) {
+   if (!(this.ingredients==null)) {
 
-          for( let key in this.ingredients) {
+          for ( let key in this.ingredients) {
               let newRow = tableRef.insertRow(-1)
               let newICell = newRow.insertCell(0)
               let newVCell = newRow.insertCell(1)
               let newIText = document.createTextNode(
                   this.ingredients[key].text
               )
-              let vegStatus = this.ingredients[key].vegetarian
+              let vegStatus = !(this.ingredients[key].vegetarian) ? 'unknown' : this.ingredients[key].vegetarian
               let newVText = document.createTextNode(vegStatus)
               newICell.appendChild(newIText)
               newVCell.appendChild(newVText)
+              if (vegStatus=== 'no'){
+                  newVCell.classList.add('non-veg-item')
+              } else  if (vegStatus === 'unknown' || vegStatus === 'maybe') {
+                newVCell.classList.add('unknown-maybe-item')
+              }
           }
       }
   }
