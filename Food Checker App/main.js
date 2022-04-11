@@ -41,6 +41,10 @@ function getFetch() {
 
       listIngredients() {
           let tableRef = document.getElementById('ingredient-table')
+ for ( let i =1; i < tableRef.rows.length;) {
+     tableRef.deleteRow(i);
+ }
+  if (!(this.ingredients==null)) {
 
           for( let key in this.ingredients) {
               let newRow = tableRef.insertRow(-1)
@@ -56,3 +60,4 @@ function getFetch() {
           }
       }
   }
+}
